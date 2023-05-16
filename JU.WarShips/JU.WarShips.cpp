@@ -32,6 +32,7 @@ int main()
     if (gamer != 1 && gamer != 2) {
         check = false;
         cout << "\nНекорректный ввод. Попробуйте еще раз\n";
+        // Очистка буфера в случае ввода знаков
         cin.clear();
         while (cin.get() != '\n')
         {
@@ -39,6 +40,11 @@ int main()
         }
     }
     } while (!check);
+    // Очистка буфера в случае ввода дробного числа
+    while (cin.get() != '\n')
+    {
+        continue;
+    }
 
     // РЕЖИМ ИГРЫ ЧЕЛОВЕК - КОМПЬЮТЕР
     if (gamer == 1) {
@@ -50,6 +56,7 @@ int main()
         if (flag_smart != 1 && flag_smart != 2) {
             check = false;
             cout << "\nНекорректный ввод. Попробуйте еще раз\n";
+            // Очистка буфера в случае ввода знаков
             cin.clear();
             while (cin.get() != '\n')
             {
@@ -57,6 +64,11 @@ int main()
             }
         }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
 
         do {
             cout << "\nРасставить корабли: 1 - самостоятельно; 2 - автоматически. ";
@@ -64,6 +76,7 @@ int main()
             cin >> placement;
             if (placement < 1 || placement > 2) {
                 check = false;
+                // Очистка буфера в случае ввода знаков
                 cin.clear();
                 while (cin.get() != '\n')
                 {
@@ -71,6 +84,11 @@ int main()
                 }
             }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
 
         if (placement == 1) hand_construct_ships(map_User, n, gamer);
         else if (placement == 2) construct_ships(map_User, n);
@@ -95,6 +113,7 @@ int main()
             if (flag_smart != 1 && flag_smart != 2) {
                 check = false;
                 cout << "Некорректный ввод. Попробуйте еще раз\n";
+                // Очистка буфера в случае ввода знаков
                 cin.clear();
                 while (cin.get() != '\n')
                 {
@@ -102,6 +121,11 @@ int main()
                 }
             }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
 
         do {
             check = true;
@@ -110,6 +134,7 @@ int main()
             if (flag_smart2 != 1 && flag_smart2 != 2) {
                 check = false;
                 cout << "Некорректный ввод. Попробуйте еще раз\n";
+                // Очистка буфера в случае ввода знаков
                 cin.clear();
                 while (cin.get() != '\n')
                 {
@@ -117,6 +142,11 @@ int main()
                 }
             }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
 
         system("cls");
         construct_ships(map_User, n);
@@ -153,6 +183,7 @@ int main()
             cin >> restart;
             if (restart != 1 && restart != 2) {
                 check = false;
+                // Очистка буфера в случае ввода знаков
                 cin.clear();
                 while (cin.get() != '\n')
                 {
@@ -161,12 +192,16 @@ int main()
                 system("cls");
             }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
+
         if (restart == 1) return main();
         else cout << "\nДо свидания.\n\n";
     }
 }
-
-
 
 void print_map_user(int array[][12], int size, int gamer) {
     if (gamer == 1) cout << "\nВаши корабли\n";
@@ -348,6 +383,7 @@ void hand_construct_ships(int array[][12], int size, int gamer)
                 {
                     cout << "Некорректный ввод. Попробуйте еще раз\n";
                     orient3 = false;
+                    // Очистка буфера в случае ввода знаков
                     cin.clear();
                     while (cin.get() != '\n')
                     {
@@ -355,6 +391,12 @@ void hand_construct_ships(int array[][12], int size, int gamer)
                     }
                 }
             } while (!orient3);
+            // Очистка буфера в случае ввода дробного числа
+            while (cin.get() != '\n')
+            {
+                continue;
+            }
+
             do {
                 orient3 = true;
                 cout << "Введите координату начальной точки корабля по горизонтали: ";
@@ -363,34 +405,52 @@ void hand_construct_ships(int array[][12], int size, int gamer)
                 {
                     cout << "Некорректный ввод. Попробуйте еще раз\n";
                     orient3 = false;
+                    // Очистка буфера в случае ввода знаков
                     cin.clear();
-                    
                     while (cin.get() != '\n')
                     {
                         continue;
                     }
                 }
             } while (!orient3);
+            // Очистка буфера в случае ввода дробного числа
+            while (cin.get() != '\n')
+            {
+                continue;
+            }
+
             temp_x = x, temp_y = y;
             if (z > 1) {
                 do { // защита от выхода корабля за пределы поля и некорректного ввода направления пользователем 
                     orient = true;
-                    cout << "Выберите направление постройки корабля (корабли не должны соприкасаться!): \n0 - вниз; 1 - вправо; 2 - вверх; 3 - влево. ";
+                    cout << "Выберите направление постройки корабля (корабли не должны соприкасаться!): \n1 - вниз; 2 - вправо; 3 - вверх; 4 - влево. ";
                     cin >> direct;
-                    if (direct >= 0 && direct <= 3)
+                    if (direct > 0 && direct <= 4)
                     {
-                        if ((x > 11 - z) && direct == 0) orient = false;
-                        else if ((y > 11 - z) && direct == 1) orient = false;
-                        else if ((x < z) && direct == 2) orient = false;
-                        else if ((y < z) && direct == 3) orient = false;
+                        if ((x > 11 - z) && direct == 1) orient = false;
+                        else if ((y > 11 - z) && direct == 2) orient = false;
+                        else if ((x < z) && direct == 3) orient = false;
+                        else if ((y < z) && direct == 4) orient = false;
                         if (!orient) cout << "Корабль не должен выходить за пределы поля\n";
                     }
                     else
                     {
                         cout << "Некорректный ввод. Попробуйте еще раз\n";
                         orient = false;
+                        // Очистка буфера в случае ввода знаков
+                        cin.clear();
+                        while (cin.get() != '\n')
+                        {
+                            continue;
+                        }
                     }
                 } while (!orient);
+                // Очистка буфера 
+                while (cin.get() != '\n')
+                {
+                    continue;
+                }
+
             }
             for (int i = 1; i <= z; i++)         // цикл для проверки соприкосновения клеток корабля с другими кораблями
             {
@@ -406,16 +466,16 @@ void hand_construct_ships(int array[][12], int size, int gamer)
                 }
                     // пристройка следущей палубы корабля
                     switch (direct) {
-                    case 0:
+                    case 1:
                         x++;
                         break;
-                    case 1:
+                    case 2:
                         y++;
                         break;
-                    case 2:
+                    case 3:
                         x--;
                         break;
-                    case 3:
+                    case 4:
                         y--;
                         break;
                     }
@@ -427,19 +487,19 @@ void hand_construct_ships(int array[][12], int size, int gamer)
                 for (int i = 1; i < z; i++)         // цикл для построения корабля
                 {
                     switch (direct) {
-                    case 0:
+                    case 1:
                         x++;
                         array[x][y] = z;
                         break;
-                    case 1:
+                    case 2:
                         y++;
                         array[x][y] = z;
                         break;
-                    case 2:
+                    case 3:
                         x--;
                         array[x][y] = z;
                         break;
-                    case 3:
+                    case 4:
                         y--;
                         array[x][y] = z;
                         break;
@@ -469,8 +529,9 @@ int& shot_user(int array[][12], int size, int& lot, int array2[][12], int gamer,
             check = true;
             cout << "Введите число для наведения выстрела по вертикали (введите 99 для остановки игры): ";
             cin >> vertic;
-            if (vertic < 1 || vertic > 10 || vertic == 0) {
+            if (vertic < 1 || vertic > 10) {
                 check = false;
+                // Очистка буфера в случае ввода знаков
                 cin.clear();
                 while (cin.get() != '\n')
                 {
@@ -483,12 +544,19 @@ int& shot_user(int array[][12], int size, int& lot, int array2[][12], int gamer,
                 goto exit_game;
             }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
+
         do {
             check = true;
             cout << "Введите число для наведения выстрела по горизонтали: ";
             cin >> horiz;
-            if (horiz < 1 || horiz > 10 || horiz == 0) {
+            if (horiz < 1 || horiz > 10) {
                 check = false;
+                // Очистка буфера в случае ввода знаков
                 cin.clear();
                 while (cin.get() != '\n')
                 {
@@ -496,11 +564,18 @@ int& shot_user(int array[][12], int size, int& lot, int array2[][12], int gamer,
                 }
             }
         } while (!check);
+        // Очистка буфера в случае ввода дробного числа
+        while (cin.get() != '\n')
+        {
+            continue;
+        }
+
         if (array[vertic][horiz] == 8 || array[vertic][horiz] == 9 || array[vertic][horiz] == -1) {
             cout << "\nВы сюда уже стреляли! Попробуйте еще раз...\n";
             check2 = false;
         }
     } while (!check2);
+
     system("cls");
     if (array[vertic][horiz] == 0 || array[vertic][horiz] == 7) {
         cout << "\n\tПРОМАХ\n";
